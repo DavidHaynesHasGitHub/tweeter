@@ -6,22 +6,20 @@
 
     <!-- External CSS -->
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-
-    <!-- Adds font file Roboto COndensed from google fonts -->
+    <!-- Adds font file Roboto Condensed from google fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,700,700i" rel="stylesheet">
-
     <!-- App CSS -->
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-
     <!-- nav bar CSS file-->
     <link rel="stylesheet" href="/styles/nav.css" type="text/css"/>
-
     <!-- new tweet stylesheet-->
     <link rel="stylesheet" href="/styles/new-tweet.css" type="text/css"/>
-
+    <!-- tweet feed stylesheet-->
+    <link rel="stylesheet" href="/styles/tweet-feed.css" type="text/css"/>
+    <!-- Material Icons CSS-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- External JS -->
     <script type="text/javascript" src="/vendor/jquery-2.2.3.min.js"></script>
-
     <!-- App JS -->
     <script type="text/javascript" src="/scripts/app.js"></script>
   </head>
@@ -50,9 +48,24 @@
 
       <!-- Tweet feed here -->
 
-      <section class="all-tweets">
-
-      </section>
+      <section class="tweets">
+      <article>
+        <header class="tweet-header">
+          <img src="/images/bird.png">
+          <h2>David Haynes</h2>
+          <p>@dhaynes</p>
+        </header>
+          <p>Tweet data here</p>
+        <footer class="tweet-footer">
+          <p>10 days old</p>
+          <div class="footer-icons">
+           <i class="material-icons">flag</i>
+           <i class="material-icons">sync</i>
+           <i class="material-icons">favorite</i>
+         </div>
+        </footer>
+      </article>
+    </section>
 
     </main>
     <script src="scripts/composer-char-counter.js" charset="utf-8"></script>
