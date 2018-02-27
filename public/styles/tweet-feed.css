@@ -13,9 +13,8 @@
   /* border: 1px solid #141C26; */
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
-  display: flex;
-  justify-content: space-between;
   width: 100%;
+  overflow: auto;
 }
 
 .tweet-header img, p, h2 {
@@ -59,13 +58,13 @@
 /* all things related to Footer */
 
 .tweets footer {
-  display:flex;
   border-top: 1px solid #141C26;
+  overflow: auto;
 }
 
 .footer-icons {
   margin: 0.5em;
-  margin-left: 17em;
+  float: right;
   visibility: hidden;
   color: #00a087;
 }
