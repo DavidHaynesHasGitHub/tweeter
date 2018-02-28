@@ -1,3 +1,5 @@
+
+
 //Takes in the text from the form and passes it to a function without reloading the page
 $(".new-tweet form").on('submit', function (e) {
   e.preventDefault()
