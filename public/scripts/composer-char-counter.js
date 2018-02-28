@@ -1,7 +1,6 @@
 const maxLetters = 140;
 
 $(document).ready(function () {
-    console.log('ready');
 
     $('.new-tweet textarea').on('keyup', function () {
         let lettersUsed = $(this).val().length;
@@ -10,6 +9,6 @@ $(document).ready(function () {
 
         if (lettersUsed > maxLetters) {
             $(this).parent().children('.counter').css('color', 'red');
-        } 
+        }
     });
 })

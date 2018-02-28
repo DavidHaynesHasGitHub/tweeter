@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+
+    <script type="text/javascript" src="/vendor/jquery-2.2.3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/livestamp/1.1.2/livestamp.js"></script>
+
     <!-- Meta Information -->
     <title>Tweeter - Home Page</title>
 
@@ -18,10 +23,7 @@
     <link rel="stylesheet" href="/styles/tweet-feed.css" type="text/css"/>
     <!-- Material Icons CSS-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- External JS -->
-    <script type="text/javascript" src="/vendor/jquery-2.2.3.min.js"></script>
-    <!-- App JS -->
-    <script type="text/javascript" src="/scripts/app.js"></script>
+
   </head>
 
   <body>
@@ -49,25 +51,31 @@
       <!-- Tweet feed here -->
 
       <section class="tweets">
-      <article>
-        <header class="tweet-header">
-          <img src="/images/bird.png">
-          <h2>David Haynes</h2>
-          <p>@dhaynes</p>
-        </header>
-        <p>Tweet data here</p>
-        <footer class="tweet-footer">
-          <p>10 days old</p>
-          <div class="footer-icons">
-           <i class="material-icons">flag</i>
-           <i class="material-icons">sync</i>
-           <i class="material-icons">favorite</i>
-         </div>
-        </footer>
-      </article>
-    </section>
+        <article>
+          <header class="tweet-header">
+            <img src="/images/bird.png">
+            <h2>David Haynes</h2>
+            <p>@dhaynes</p>
+          </header>
+          <div class="tweet-body">
+            <p id="tweetText">Tweet data here</p>
+          </div>
+          <footer class="tweet-footer">
+            <p>10 days old</p>
+            <div class="footer-icons">
+             <i class="material-icons">flag</i>
+             <i class="material-icons">sync</i>
+             <i class="material-icons">favorite</i>
+           </div>
+          </footer>
+        </article>
+   </section>
 
     </main>
+
     <script src="scripts/composer-char-counter.js" charset="utf-8"></script>
+
+
+    <script src="scripts/app.js" charset="utf-8"></script>
   </body>
 </html>

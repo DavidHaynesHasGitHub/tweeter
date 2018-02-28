@@ -29,7 +29,7 @@
 }
 
 .tweet-header h2 {
-  float: left;
+ margin-left: -7em
 }
 
 .tweets .tweet-header {
