@@ -1,5 +1,5 @@
 /* style the main element*/
-.tweets {
+.tweetFeed article {
   margin: 1em 0em;
   border: 1px solid #141C26;
   border-radius: 15px;
@@ -31,7 +31,7 @@
  float:left;
 }
 
-.tweets .tweet-header {
+.tweet-header {
   opacity: 0.5;
 }
 
@@ -42,12 +42,12 @@
 
 /* all styles related to the body elements*/
 
-.tweets .tweet-body {
+.tweet-body {
   border-top: 1px solid #141C26;
   word-wrap: break-word;
 }
 
-.tweets .tweet-body p {
+.tweet-body p {
   width: 100%;
   text-align: left;
   padding-left: 0.5em;
@@ -56,7 +56,7 @@
 
 /* all things related to Footer */
 
-.tweets footer {
+footer {
   border-top: 1px solid #141C26;
   overflow: auto;
 }
@@ -74,16 +74,16 @@
 }
 
 /* all things related to hover */
-.tweets:hover .tweet-header {
+article:hover .tweet-header {
   opacity: 1;
 }
 
-.tweets:hover {
+article:hover {
   border: 2px solid #141C26;
   box-shadow: 5px 10px rgba(20, 28, 38, 0.25);
 }
 
-.tweets:hover .footer-icons {
+article:hover .footer-icons {
   visibility: visible;
 }
 
