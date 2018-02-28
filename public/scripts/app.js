@@ -1,5 +1,3 @@
-
-
 //Takes in the text from the form and passes it to a function without reloading the page
 $(".new-tweet form").on('submit', function (e) {
   e.preventDefault()
@@ -13,6 +11,14 @@ $(".new-tweet form").on('submit', function (e) {
   postNewTweet(escape(tweetBody));
 });
 
+//slides new tweet bar into view
+$("#nav-bar .compose").on('click', function (event) {
+   $(".new-tweet").slideToggle("slow", () => {
+     if($(".new-tweet").is(':visible')) {
+       $(".new-tweet textarea").focus();
+     }
+  });
+})
 //prevents malicious code from being inserted with the user tweet
 function escape(str) {
   var div = document.createElement('div');
