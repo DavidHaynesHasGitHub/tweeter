@@ -1,101 +1,83 @@
+//Takes in the text from the form and passes it to a function without reloading the page
+$(".new-tweet form").on('submit', function (event) {
+  event.preventDefault();
 
-const data = [
-  {
-    "user": {
-      "name": "Newton",
-      "avatars": {
-        "small":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_50.png",
-        "regular": "https://vanillicon.com/788e533873e80d2002fa14e1412b4188.png",
-        "large":   "https://vanillicon.com/788e533873e80d2002fa14e1412b4188_200.png"
-      },
-      "handle": "@SirIsaac"
-    },
-    "content": {
-      "text": "If I have seen further it is by standing on the shoulders of giants"
-    },
-    "created_at": 1519786374084
-  },
-  {
-    "user": {
-      "name": "Descartes",
-      "avatars": {
-        "small":   "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_50.png",
-        "regular": "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc.png",
-        "large":   "https://vanillicon.com/7b89b0d8280b93e2ba68841436c0bebc_200.png"
-      },
-      "handle": "@rd" },
-    "content": {
-      "text": "Je pense , donc je suis"
-    },
-    "created_at": 1519586397000
-  },
-  {
-    "user": {
-      "name": "Johann von Goethe",
-      "avatars": {
-        "small":   "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_50.png",
-        "regular": "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1.png",
-        "large":   "https://vanillicon.com/d55cf8e18b47d4baaf60c006a0de39e1_200.png"
-      },
-      "handle": "@johann49"
-    },
-    "content": {
-      "text": "Es ist nichts schrecklicher als eine tätige Unwissenheit."
-    },
-    "created_at": 1461113796368
-  }
-];
+   let tweetBody = $('#newTweet textarea[name="tweetText"]').val();
+   if (!tweetBody) {
+     alert("You cant tweet nothing!");
+     return;
+   }
+   console.log("posting new tweet")
+   postNewTweet(tweetBody);
+});
 
 
+let loadTweets = function () {
+    $.get("/tweets", function (data) {
+      $(".tweets").remove()
+        console.log("got tweets to render")
+        renderTweets(data);
+    })
+};
 
+//adds tweetText to /tweets to be rendered by loadTweets function
+let postNewTweet = function (tweetBody) {
+  let tweetText = {
+      text: tweetBody
+  };
+  $.post("/tweets", tweetText, function (data) {
+      console.log('posted tweet, now time to render page');
+       $(".tweets").remove()
+       loadTweets();
+  })
+  //clear the form after we tweet
+  $(".new-tweet form textarea").val("");
+};
+
+// RENDERS THE TWEET OBJECTS
 let renderTweets = function (data) {
     for (let tweet of data) {
         let $tweetElement = createTweetElement(tweet);
         $(".container").append($tweetElement);
     }
 }
+//ALL FUNCTIONS REGARDING BUILDING THE TWEET OBJECT
 
+//creates the header element for the tweet
 let createHeader = function (tweet){
-  let $header = $('<header>').addClass('tweet-header')
+  let $header = $('<header>').addClass('tweet-header');
+  let $img = $('<img src=' + tweet.user.avatars.small + '>');
+  let $h2 = $('<h2>' + tweet.user.name + '</h2>');
+  let $p = $('<p>' + tweet.user.handle + '</p>');
 
-  let $img = $('<img src=' + tweet.user.avatars.small + '>')
-  let $h2 = $('<h2>' + tweet.user.name + '</h2>')
-  let $p = $('<p>' + tweet.user.handle + '</p>')
-
-  $header.append($img)
-  $header.append($h2)
-  $header.append($p)
-  return $header
-}
-
+  $header.append($img).append($h2).append($p)
+  return $header;
+};
+//creates the footer element for the tweet
 let createFooter = function (tweet){
   let timePosted = tweet.created_at / 1000;
-  console.log(timePosted)
-  let $footer = $('<footer>').addClass('tweet-footer');
+  let $footer = $('<footer>').addClass('tweet-footer')
   let $p = $('<p data-livestamp=' + timePosted + '></p>')
   let $footerIcons = $('<div>').attr("class", "footer-icons")
   $footerIcons.append('<i class="material-icons">flag</i>')
-  $footerIcons.append('<i class="material-icons">sync</i>')
-  $footerIcons.append('<i class="material-icons">favorite</i>')
+              .append('<i class="material-icons">sync</i>')
+              .append('<i class="material-icons">favorite</i>')
 
-  $footer.append($p)
-  $footer.append($footerIcons)
-  return $footer
-}
-
+  $footer.append($p).append($footerIcons)
+  return $footer;
+};
+//creates the main article elements for the tweet
 let createTweetElement = function (tweet) {
     let $tweetArticle = $(`<section class='tweets'>`);
     let $innerArticle = $("<article>");
 
     let $header = createHeader(tweet);
-    $innerArticle.append($header);
-    $innerArticle.append("<div class='tweet-body clearfix'><p>" + tweet.content.text);
+    $innerArticle.append($header).append("<div class='tweet-body clearfix'><p>" + tweet.content.text);
 
     let $footer = createFooter(tweet);
     $innerArticle.append($footer);
     $tweetArticle.append($innerArticle);
 
     return $tweetArticle;
-}
-
-renderTweets(data);
+};
+loadTweets()
