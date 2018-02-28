@@ -27,7 +27,7 @@ const data = [
     "content": {
       "text": "Je pense , donc je suis"
     },
-    "created_at": 1461113959088
+    "created_at": 1519586397000
   },
   {
     "user": {
@@ -82,6 +82,7 @@ let createFooter = function (tweet){
   $footer.append($footerIcons)
   return $footer
 }
+
 let createTweetElement = function (tweet) {
     let $tweetArticle = $(`<section class='tweets'>`);
     let $innerArticle = $("<article>");
