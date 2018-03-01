@@ -1,14 +1,14 @@
+$(document).ready(function () {
 //Takes in the text from the form and passes it to a function without reloading the page
 $(".new-tweet form").on('submit', function (e) {
   e.preventDefault()
 
   let tweetBody = $('#newTweet textarea[name="tweetText"]').val();
-console.log(tweetBody)
   if (!tweetBody) {
    alert("You cant tweet nothing!");
    return;
   }
-  postNewTweet(escape(tweetBody));
+  postNewTweet(tweetBody);
 });
 
 //slides new tweet bar into view
@@ -20,13 +20,6 @@ $("#nav-bar .compose").on('click', function (event) {
   });
 })
 
-//prevents malicious code from being inserted with the user tweet
-function escape(str) {
-  var div = document.createElement('div');
-  div.appendChild(document.createTextNode(str));
-  return div.innerHTML;
-};
-
 //stages the tweets to be rendered after clearing the
 const loadTweets = function () {
   $.get("/tweets", renderTweets);
@@ -37,7 +30,6 @@ const postNewTweet = function (tweetBody) {
   let tweetText = {
       text: tweetBody
   };
-
   $.post("/tweets", tweetText, loadTweets)
 
   //clear the form after submit
@@ -49,17 +41,9 @@ const renderTweets = function (data) {
   var $tweetFeed = $(".tweetFeed").empty();
   for (let tweet of data) {
     let $tweetElement = createTweetElement(tweet);
-    animate(tweet)
-    $tweetFeed.prepend($tweetElement);
-  }
-};
 
-//adds animations to all tweets on hover
-const animate = function () {
-  $(".article").hover(function () {
-    $("#footer-icons").toggleClass("animated bounce");
-    $(this).toggleClass("animated bounce");
-  })
+      $tweetFeed.prepend($tweetElement);
+  }
 };
 
 //ALL FUNCTIONS REGARDING BUILDING THE TWEET OBJECT
@@ -79,14 +63,19 @@ const createFooter = function (tweet){
   let timePosted = tweet.created_at / 1000;
   let $footer = $('<footer>').addClass('tweet-footer')
   let $p = $('<p data-livestamp=' + timePosted + '></p>')
-  let $footerIcons = $('<div>').attr("class", "footer-icons")
-  $footerIcons.append('<i class="material-icons">flag</i>')
-              .append('<i class="material-icons">sync</i>')
-              .append('<i class="material-icons">favorite</i>')
+  let $footerIcons = $('<div>').addClass("footer-icons ")
+  $footerIcons.append('<i id="flag"class="material-icons">flag</i>')
+              .append('<i id="sync"class="material-icons">sync</i>')
+              .append('<i id="fav" class="material-icons">favorite</i>')
 
   $footer.append($p).append($footerIcons).append('<div class="clearfix">')
   return $footer;
 };
+
+$('#fav').on('click', function(){
+  console.log(1);
+})
+
 //creates the main article elements for the tweet
 const createTweetElement = function (tweet) {
   let $tweet = $("<article>");
@@ -99,3 +88,4 @@ const createTweetElement = function (tweet) {
   return $tweet;
 };
 loadTweets();
+});

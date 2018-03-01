@@ -87,4 +87,16 @@ article:hover .footer-icons {
   visibility: visible;
 }
 
+#sync:hover{
+  animation: swing 1s;
+}
+
+#flag:hover{
+  animation: swing 1s;
+}
+
+#fav:hover{
+  animation: swing 1s;
+}
+
 /*# sourceMappingURL=tweets.css.map */

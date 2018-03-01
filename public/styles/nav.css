@@ -44,4 +44,5 @@
 #nav-bar .compose:hover  {
   background: #FF5F78;
   text-decoration: none;
+  animation: pulse 1s;
 }
