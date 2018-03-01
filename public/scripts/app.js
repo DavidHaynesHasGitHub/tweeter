@@ -3,11 +3,11 @@ $(".new-tweet form").on('submit', function (e) {
   e.preventDefault()
 
   let tweetBody = $('#newTweet textarea[name="tweetText"]').val();
-
-  if (!tweetBody.trim.length) {
+console.log(tweetBody)
+  if (!tweetBody) {
    alert("You cant tweet nothing!");
    return;
-  };
+  }
   postNewTweet(escape(tweetBody));
 });
 
@@ -38,7 +38,7 @@ const postNewTweet = function (tweetBody) {
       text: tweetBody
   };
 
-  $.post("/tweets", tweetText, loadTweets, animate)
+  $.post("/tweets", tweetText, loadTweets)
 
   //clear the form after submit
   $(".new-tweet form textarea").val("");
@@ -49,7 +49,7 @@ const renderTweets = function (data) {
   var $tweetFeed = $(".tweetFeed").empty();
   for (let tweet of data) {
     let $tweetElement = createTweetElement(tweet);
-    animate($tweetElement)
+    animate(tweet)
     $tweetFeed.prepend($tweetElement);
   }
 };
