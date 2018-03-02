@@ -8,7 +8,7 @@ $(".new-tweet form").on('submit', function (e) {
    alert("You cant tweet nothing!");
    return;
   }
-  postNewTweet(tweetBody);
+  postNewTweet(escape(tweetBody));
 });
 
 //slides new tweet bar into view
@@ -36,6 +36,13 @@ const postNewTweet = function (tweetBody) {
   $(".new-tweet form textarea").val("");
 };
 
+//To prevent script injections
+let escape = function (str) {
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+}
+
 // RENDERS THE TWEET OBJECTS
 const renderTweets = function (data) {
   var $tweetFeed = $(".tweetFeed").empty();
@@ -58,6 +65,7 @@ const createHeader = function (tweet){
   $header.append($img).append($h2).append($p)
   return $header;
 };
+
 //creates the footer element for the tweet
 const createFooter = function (tweet){
   let timePosted = tweet.created_at / 1000;
@@ -87,5 +95,7 @@ const createTweetElement = function (tweet) {
 
   return $tweet;
 };
+
+//loads all tweets on page ready
 loadTweets();
 });
